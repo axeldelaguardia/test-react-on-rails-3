@@ -46,6 +46,10 @@ group :development, :test do
 	gem "pry"
 	gem "pry-rails"
 	gem "capybara"
+	gem "faker"
+	gem "factory_bot_rails"
+	gem "shoulda-matchers"
+	gem "simplecov"
 end
 
 group :development do
@@ -63,3 +67,5 @@ end
 gem "shakapacker", "7.0"
 
 gem "react_on_rails", "13.3"
+
+gem "bcrypt", "~> 3.1"
