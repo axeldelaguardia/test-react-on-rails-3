@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import style from './HelloWorld.module.css';
+import style from './HelloWorld.module.scss';
 
 const HelloWorld = (props) => {
   const [name, setName] = useState(props.name);
@@ -9,8 +9,8 @@ const HelloWorld = (props) => {
     <div>
       <h3>Hello, {name}!</h3>
       <hr />
-      <form>
-        <label className={style.bright} htmlFor="name">
+      <form className={style.bright}>
+        <label className={style.case} htmlFor="name">
           Say hello to:
           <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </label>
