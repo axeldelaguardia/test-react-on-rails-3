@@ -32,22 +32,20 @@ const NavBar = () => {
 	};
 
   return (
-    <Layout className={style.mainLayout}>
-      <Header
-        className={style.header}
-      >
-        <h1 className={style.title} >React on Rails Demo</h1>
-        <Menu 
-					theme="dark" 
-					mode="horizontal" 
-					defaultSelectedKeys={['2']} 
-					items={items1}
-					className={style.navMenu}
-					onSelect={handleNavItemSelect}
-				/>
-				<AuthButton type='logout' />
-      </Header>
-    </Layout>
+		<Header
+			className={style.header}
+		>
+			<h1 className={style.title} >React on Rails Demo</h1>
+			<Menu 
+				theme="dark" 
+				mode="horizontal" 
+				defaultSelectedKeys={['2']} 
+				items={items1}
+				className={style.navMenu}
+				onSelect={handleNavItemSelect}
+			/>
+			<AuthButton type='logout' />
+		</Header>
   );
 };
 
