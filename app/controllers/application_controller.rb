@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
 	def authorize
 		redirect_to login_path unless current_user
 	end
+
+	def error_message(errors)
+		errors.full_message.join(", ")
+	end
 end
