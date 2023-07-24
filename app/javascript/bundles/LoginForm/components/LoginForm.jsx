@@ -1,39 +1,64 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import style from './LoginForm.module.scss';
+import { useNavigate } from 'react-router-dom';
+
+// const navigate = useNavigate();
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+	const [authenticity_token] = useState(document.querySelector('meta[name="csrf-token"]').content);
 
-	const handleSubmit = async (e) => {
-    e.preventDefault();
+	// const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-		const token = document.querySelector('meta[name="csrf-token"]').content;
+	// 	const token = document.querySelector('meta[name="csrf-token"]').content;
 
-		axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+	// 	axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 		
 
-    try {
-      const response = await axios.post(
-        '/login',
-        {
-          authenticity_token: token,
-          email: email,
-          password: password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+  //     const response = axios.post(
+  //       '/login',
+  //       {
+  //         authenticity_token: token,
+  //         email: email,
+  //         password: password,
+  //       },
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       }
+  //     );
+  // };
 
-      console.log('Login successful!', response.data);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  };
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const form = e.target;
+	
+		const tokenInput = document.createElement('input');
+		tokenInput.setAttribute('type', 'hidden');
+		tokenInput.setAttribute('name', 'authenticity_token');
+		tokenInput.value = authenticity_token;
+		form.appendChild(tokenInput);
+
+		const emailInput = document.createElement('input');
+		emailInput.setAttribute('type', 'hidden');
+		emailInput.setAttribute('name', 'session[email]');
+		emailInput.value = email;
+		form.appendChild(emailInput);
+
+		const passwordInput = document.createElement('input');
+		passwordInput.setAttribute('type', 'hidden');
+		passwordInput.setAttribute('name', 'session[password]');
+		passwordInput.value = password;
+		form.appendChild(passwordInput);
+
+		form.submit();
+	};
+
+
 
   return (
     <form className={style.Login} onSubmit={handleSubmit} action="/login" method="post">
