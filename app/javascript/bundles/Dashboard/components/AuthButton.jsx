@@ -26,7 +26,7 @@ const AuthButton = ({ type }) => {
 
 		} else if (type === 'login') {
 			form.action = '/login';
-			form.method = 'post';
+			form.method = 'get';
 
 			const submitButton = document.createElement('input');
 			submitButton.type = 'submit';
@@ -35,6 +35,10 @@ const AuthButton = ({ type }) => {
 			submitButton.click();
 		}
   };
+
+	if (type === 'hidden') {
+		return null;
+	}
 
 	return (
 		<Button 

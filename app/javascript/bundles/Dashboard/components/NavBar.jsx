@@ -9,7 +9,7 @@ const items1 = ['Home', 'Dashboard', 'Search'].map((key) => ({
   label: key,
 }));
 
-const NavBar = () => {
+const NavBar = ({ authType }) => {
 
 	const [selectedNavItem, setSelectedNavItem] = useState(null);
 
@@ -44,7 +44,7 @@ const NavBar = () => {
 				className={style.navMenu}
 				onSelect={handleNavItemSelect}
 			/>
-			<AuthButton type='logout' />
+			<AuthButton type={ authType } />
 		</Header>
   );
 };

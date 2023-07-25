@@ -4,11 +4,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-	root "hello_world#index"
+	root "welcome#index"
 
 	get "/login", to: "sessions#new"
 	post "/login", to: "sessions#create"
 	delete "/logout", to: "sessions#destroy"
 
 	get "/dashboard", to: "users#show"
+	# get "/updateaccount", to: "users#edit"
+	patch "/users", to: "users#update"
 end

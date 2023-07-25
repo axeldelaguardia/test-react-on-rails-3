@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
-import AuthButton from './AuthButton';
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 import style from './Dashboard.module.scss';
 import NavBar from './NavBar';
+import AccountInfo from './AccountInfo';
 
 const accountSettings = [LaptopOutlined].map((icon, index) => {
 	const key = String(index + 1);
@@ -40,13 +41,12 @@ const displaySettings = [UserOutlined].map((icon, index) => {
 
 const settingsMenu = [...accountSettings, ...displaySettings,]
 
-const Dashboard = () => {
+const Dashboard = ({name, email, timezone}) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
 	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
-
 	useEffect(() => {
 		setSelectedMenuItem('1');
 	}, []);
@@ -58,7 +58,7 @@ const Dashboard = () => {
 
   return (
     <Layout className={style.mainLayout}>
-			<NavBar />
+			<NavBar authType={'logout'}/>
       <Layout>
         <Sider
           width={230}
@@ -81,7 +81,7 @@ const Dashboard = () => {
           <Content
 						className={style.content}
           >
-            {selectedMenuItem === '1' && <div>Account Information</div>}
+            {selectedMenuItem === '1' && <AccountInfo name={name} email={email} timezone={timezone}/>}
             {selectedMenuItem === '2' && <div>Email</div>}
             {selectedMenuItem === '3' && <div>Password</div>}
             {selectedMenuItem === '4' && <div>Background</div>}
@@ -92,4 +92,11 @@ const Dashboard = () => {
     </Layout>
   );
 };
+
+Dashboard.propTypes = {
+	name: PropTypes.string.isRequired,
+	email: PropTypes.string.isRequired,
+	timezone: PropTypes.string.isRequired,
+};
+
 export default Dashboard;
