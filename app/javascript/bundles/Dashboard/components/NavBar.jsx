@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import AuthButton from './AuthButton';
 const { Header} = Layout;
-import style from './Dashboard.module.scss';
+import style from './Settings.module.scss';
 
-const items1 = ['Home', 'Dashboard', 'Search'].map((key) => ({
+const items1 = ['Home', 'Dashboard', 'Settings'].map((key) => ({
   key,
   label: key,
 }));
@@ -23,10 +23,8 @@ const NavBar = ({ authType }) => {
 			case 'Dashboard':
 				window.location.href = '/dashboard';
 				break;
-			case 'Search':
-				window.location.href = '/search';
-				break;
-			default:
+			case 'Settings':
+				window.location.href = '/settings';
 				break;
 		}
 	};
@@ -37,9 +35,8 @@ const NavBar = ({ authType }) => {
 		>
 			<h1 className={style.title} >React on Rails Demo</h1>
 			<Menu 
-				theme="dark" 
-				mode="horizontal" 
-				defaultSelectedKeys={['2']} 
+				theme="dark"
+				defaultSelectedKeys={['1']} 
 				items={items1}
 				className={style.navMenu}
 				onSelect={handleNavItemSelect}

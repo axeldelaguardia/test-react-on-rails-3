@@ -1,102 +1,135 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
-const { Content, Sider } = Layout;
-import style from './Dashboard.module.scss';
-import NavBar from './NavBar';
-import AccountInfo from './AccountInfo';
+import React from 'react'
+import PropTypes from 'prop-types'
+import PageLayout from './PageLayout'
+import style from './Dashboard.module.scss'
 
-const accountSettings = [LaptopOutlined].map((icon, index) => {
-	const key = String(index + 1);
-	return {
-		key: `sub${key}`,
-		icon: React.createElement(icon),
-		label: 'Account Settings',
-		children: ["Account Information", "Email", "Password"].map((label, j) => {
-			const subKey = index * 4 + j + 1;
-			return {
-				key: subKey,
-				label: label,
-			};
-		}),
-	};
-});
+const Dashboard = ({user, name, email}) => {
+	const handleOnMouseMoveEvent = (e) => {
+		const { currentTarget: target } = e;
 
-const displaySettings = [UserOutlined].map((icon, index) => {
-	const key = String(index + 4);
-	return {
-		key: `sub${key}`,
-		icon: React.createElement(icon),
-		label: 'Display Settings',
-		children: ["Background", "Font"].map((label, j) => {
-			const subKey = index * 4 + j + 4;
-			return {
-				key: subKey,
-				label: label,
-			};
-		}),
-	};
-});
+		const rect = target.getBoundingClientRect(),
+			x = e.clientX - rect.left,
+			y = e.clientY - rect.top;
 
-const settingsMenu = [...accountSettings, ...displaySettings,]
-
-const Dashboard = ({name, email, timezone}) => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
-	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
-	useEffect(() => {
-		setSelectedMenuItem('1');
-	}, []);
-
-	const handleMenuItemSelect = (item) => {
-		setSelectedMenuItem(item.key);
-		console.log(item.key, item)
+		target.style.setProperty('--mouse-x', `${x}px`);
+		target.style.setProperty('--mouse-y', `${y}px`);
 	}
 
-  return (
-    <Layout className={style.mainLayout}>
-			<NavBar authType={'logout'}/>
-      <Layout>
-        <Sider
-          width={230}
-          style={{
-            background: colorBgContainer,
-          }}
-        >
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-						className={style.subMenu}
-            items={settingsMenu}
-						onSelect={handleMenuItemSelect}
-          />
-        </Sider>
-        <Layout
-					className={style.contentLayout}
-        >
-          <Content
-						className={style.content}
-          >
-            {selectedMenuItem === '1' && <AccountInfo name={name} email={email} timezone={timezone}/>}
-            {selectedMenuItem === '2' && <div>Email</div>}
-            {selectedMenuItem === '3' && <div>Password</div>}
-            {selectedMenuItem === '4' && <div>Background</div>}
-            {selectedMenuItem === '5' && <div>Font</div>}
-          </Content>
-        </Layout>
-      </Layout>
-    </Layout>
-  );
+	// for(const card of document.querySelectorAll(".card")) {
+	// 	card.onmousemove = e => handleOnMouseMoveEvent(e);
+	// 	console.log(card)
+	// }
+
+	return (
+		<PageLayout user={user} className={style.mainLayout}>
+			<div className={style.cardBody}>
+				<div className={style.cards}>
+					<div className={style.card}>
+						<div className={style.cardContent}>
+							{/* <div class="card-image">
+								<i class="fa-duotone fa-apartment"></i>
+							</div>
+							<div class="card-info-wrapper">
+								<div class="card-info">
+									<i class="fa-duotone fa-apartment"></i>
+									<div class="card-info-title">
+										<h3>Apartments</h3>  
+										<h4>Places to be apart. Wait, what?</h4>
+									</div>    
+								</div>
+							</div> */}
+						</div>
+					</div>
+					<div className={style.card}>
+						{/* <div class="card-content">
+							<div class="card-image">
+								<i class="fa-duotone fa-unicorn"></i>
+							</div>
+							<div class="card-info-wrapper">
+								<div class="card-info">
+									<i class="fa-duotone fa-unicorn"></i>
+									<div class="card-info-title">
+										<h3>Unicorns</h3>  
+										<h4>A single corn. Er, I mean horn.</h4>
+									</div>    
+								</div>  
+							</div>
+						</div> */}
+					</div>
+					<div className={style.card}>
+						{/* <div class="card-content">
+							<div class="card-image">
+								<i class="fa-duotone fa-blender-phone"></i>
+							</div>
+							<div class="card-info-wrapper">
+								<div class="card-info">
+									<i class="fa-duotone fa-blender-phone"></i>
+									<div class="card-info-title">
+										<h3>Blender Phones</h3>  
+										<h4>These absolutely deserve to exist.</h4>
+									</div>    
+								</div>
+							</div>
+						</div> */}
+					</div>
+					<div className={style.card}>
+						{/* <div class="card-content">
+							<div class="card-image">
+								<i class="fa-duotone fa-person-to-portal"></i>
+							</div>
+							<div class="card-info-wrapper">
+								<div class="card-info">
+									<i class="fa-duotone fa-person-to-portal"></i>
+									<div class="card-info-title">
+										<h3>Adios</h3>  
+										<h4>See you...</h4>
+									</div>    
+								</div>
+							</div>
+						</div> */}
+					</div>
+					<div className={style.card}>
+						{/* <div class="card-content">
+							<div class="card-image">
+								<i class="fa-duotone fa-person-from-portal"></i>
+							</div>
+							<div class="card-info-wrapper">
+								<div class="card-info">
+									<i class="fa-duotone fa-person-from-portal"></i>
+									<div class="card-info-title">
+										<h3>I mean hello</h3>  
+										<h4>...over here.</h4>
+									</div>    
+								</div>
+							</div>
+						</div> */}
+					</div>
+					<div className={style.card}>
+						{/* <div class="card-content">
+							<div class="card-image">
+								<i class="fa-duotone fa-otter"></i>
+							</div>
+							<div class="card-info-wrapper">
+								<div class="card-info">
+									<i class="fa-duotone fa-otter"></i>
+									<div class="card-info-title">
+										<h3>Otters</h3>  
+										<h4>Look at me, imma cute lil fella.</h4>
+									</div>    
+								</div>
+							</div>
+						</div> */}
+					</div>
+				</div>
+			</div>
+		</PageLayout>
+	);
 };
 
 Dashboard.propTypes = {
-	name: PropTypes.string.isRequired,
-	email: PropTypes.string.isRequired,
-	timezone: PropTypes.string.isRequired,
+	user: PropTypes.object,
+	name: PropTypes.string,
+	email: PropTypes.string,
 };
 
 export default Dashboard;

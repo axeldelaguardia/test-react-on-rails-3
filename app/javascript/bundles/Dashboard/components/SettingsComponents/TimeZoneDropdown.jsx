@@ -1,6 +1,6 @@
 import { Select } from 'antd';
 import React from 'react';
-import handleFormSubmit from '../utils/formUtils';
+import handleFormSubmit from '../../utils/formUtils';
 
 const [authenticity_token] = [document.querySelector('meta[name="csrf-token"]').content];
 
@@ -19,10 +19,13 @@ const onSearch = (value) => {
   console.log('search:', value);
 };
 
-const TimeZoneDropdown = () => (
+const TimeZoneDropdown = ({timezone}) => {
+	const placeholder = timezone ? timezone : "Select a new timezone";
+
+	return (
   <Select
     showSearch
-    placeholder="Select a timezone"
+    placeholder={placeholder}
     optionFilterProp="children"
     onChange={onChange}
     onSearch={onSearch}
@@ -32,30 +35,31 @@ const TimeZoneDropdown = () => (
 		style={{ width: '200px' }}
     options={[
       {
-        value: 'CDT',
+        value: 'Central Daylight Time',
         label: 'Central Daylight Time',
       },
       {
-        value: 'MDT',
+        value: 'Mountain Daylight Time',
         label: 'Mountain Daylight Time',
       },
       {
-        value: 'MST',
+        value: 'Mountain Standard Time',
         label: 'Mountain Standard Time',
       },
       {
-        value: 'PDT',
+        value: 'Pacific Daylight Time',
         label: 'Pacific Daylight Time',
       },
       {
-        value: 'AKDT',
+        value: 'Alaska Daylight Time',
         label: 'Alaska Daylight Time',
       },
       {
-        value: 'HST',
+        value: 'Hawaii Standard Time',
         label: 'Hawaii Standard Time',
       },
     ]}
   />
-);
+	)
+};
 export default TimeZoneDropdown;

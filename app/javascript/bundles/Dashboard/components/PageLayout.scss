@@ -1,0 +1,38 @@
+.mainLayout {
+	height: 98vh;
+	width: 100%;
+	background: #57657a;
+
+	.header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 24px;
+	}
+
+	.title {
+		color: white;
+		// margin-right: ;
+	}
+
+	// .navMenu {
+	// }
+
+	.subMenu {
+		height: 100%;
+		border-right: 6;
+	}
+
+	.contentLayout {
+		padding: 0 24px 24px;
+
+		// .content {
+		// 	padding: 24px;
+		// 	margin: 0;
+		// 	min-height: 280;
+		// 	background: #fff;
+		// 	font-size: large;
+		// 	font-weight: 600;
+		// }
+	}
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UpdateUserInfoModal from "./UpdateUserInfo";
-import  handleFormSubmit  from "../utils/formUtils";
+import  handleFormSubmit  from "../../utils/formUtils";
 import TimeZoneDropdown from "./TimeZoneDropdown";
 
 const AccountInfo = ({name, email, timezone}) => {
@@ -27,15 +27,15 @@ const AccountInfo = ({name, email, timezone}) => {
 		<div>
 			<h2>Account Information</h2>
 			<div>
-			<p>Name: {name}</p>
-			<p>Email: {email}</p>
-			<p>Timezone: {timezone}</p>
-			<button onClick={() => setIsModalVisible(true)}>Update User Info</button>
-			<UpdateUserInfoModal visible={isModalVisible} onCancel={handleCancel} onUpdate={handleUpdate}></UpdateUserInfoModal>
-			<hr/>
+				<p><b>Name:</b> {name}</p>
+				<p><b>Email:</b> {email}</p>
+				<p><b>Timezone:</b> {timezone}</p>
+				{/* <button onClick={() => setIsModalVisible(true)}>Update User Info</button> */}
+				{/* <UpdateUserInfoModal visible={isModalVisible} onCancel={handleCancel} onUpdate={handleUpdate}></UpdateUserInfoModal> */}
 			</div>
-				<h3>Time Zone</h3>
-			<TimeZoneDropdown/>
+			{/* <hr/> */}
+				{/* <h3>Time Zone</h3>
+			<TimeZoneDropdown timezone={timezone}/> */}
 		</div>
 	);
 };
