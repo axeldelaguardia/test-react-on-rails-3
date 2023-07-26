@@ -4,7 +4,17 @@ class UsersController < ApplicationController
 	def show
 		if current_user
 			user = current_user
-			@user_props = { name: user.name, email: user.email, timezone: user.timezone }
+			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone }
+		else
+			flash[:danger] = "You must be logged in to view this page."
+			redirect_to root_path
+		end
+	end
+
+	def edit
+		if current_user
+			user = current_user
+			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone }
 		else
 			flash[:danger] = "You must be logged in to view this page."
 			redirect_to root_path
@@ -12,15 +22,28 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		# Add user authentication before updating here.
 		user = current_user
-		user.update(user_params)
-		redirect_to "/dashboard"
+		if authenticate(user)
+			params[:user][:new_password] ? update_password(user) : user.update(user_params)
+		else
+			flash[:danger] = "Incorrect password."
+		end
+		redirect_to "/settings"
 	end
 
 	private
 
 	def user_params
 		params.require(:user).permit(:name, :email, :timezone)
+	end
+
+	def authenticate(user)
+		user&.authenticate(params[:user][:current_password])
+	end
+
+	def update_password(user)
+		if (params[:user][:new_password] == params[:user][:new_password_confirmation])
+			user.update(password: params[:user][:new_password])
+		end
 	end
 end
