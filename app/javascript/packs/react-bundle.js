@@ -2,7 +2,7 @@ import ReactOnRails from 'react-on-rails';
 
 import PageLayout from '../bundles/Dashboard/components/PageLayout';
 import LoginForm from '../bundles/Dashboard/components/LoginForm';
-import Settings from '../bundles/Dashboard/components/Settings';
+import Settings from '../bundles/Dashboard/components/SettingsComponents/Settings';
 import AccountInfo from '../bundles/Dashboard/components/SettingsComponents/AccountInfo';
 import UpdateUserInfoModal from '../bundles/Dashboard/components/SettingsComponents/UpdateUserInfo';
 import TimeZoneDropdown from '../bundles/Dashboard/components/SettingsComponents/TimeZoneDropdown';

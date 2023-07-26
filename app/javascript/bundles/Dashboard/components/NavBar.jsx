@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import AuthButton from './AuthButton';
 const { Header} = Layout;
-import style from './Settings.module.scss';
+import style from './SettingsComponents/Settings.module.scss';
 
 const items1 = ['Home', 'Dashboard', 'Settings'].map((key) => ({
   key,

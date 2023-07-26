@@ -4,9 +4,9 @@ import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 const { Content, Sider } = Layout;
 import style from './Settings.module.scss';
-import AccountInfo from './SettingsComponents/AccountInfo';
-import UpdateAccount from './SettingsComponents/UpdateAccount';
-import PageLayout from './PageLayout';
+import AccountInfo from './AccountInfo';
+import UpdateAccount from './UpdateAccount';
+import PageLayout from '../PageLayout';
 
 const accountSettings = [LaptopOutlined].map((icon, index) => {
 	const key = String(index + 1);

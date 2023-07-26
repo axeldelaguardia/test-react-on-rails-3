@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import style from './Settings.module.scss';
+import style from './SettingsComponents/Settings.module.scss';
 import NavBar from './NavBar';
 import LoginForm from './LoginForm';
 
