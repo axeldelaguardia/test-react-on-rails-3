@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 	get "/dashboard", to: "users#show"
 	# get "/updateaccount", to: "users#edit"
 	patch "/users", to: "users#update"
+	get "/settings", to: "users#edit"
 end
