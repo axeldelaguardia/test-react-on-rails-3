@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	def show
 		if current_user
 			user = current_user
-			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone }
+			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone, image_path: user.image_path }
 		else
 			flash[:danger] = "You must be logged in to view this page."
 			redirect_to root_path
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 	def edit
 		if current_user
 			user = current_user
-			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone }
+			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone, image_path: user.image_path }
 		else
 			flash[:danger] = "You must be logged in to view this page."
 			redirect_to root_path
@@ -28,7 +28,16 @@ class UsersController < ApplicationController
 		else
 			flash[:danger] = "Incorrect password."
 		end
-		redirect_to "/settings"
+		redirect_to settings_path
+	end
+
+	def upload_image
+		user = current_user
+		if params[:file]
+			save_profile_pic(params[:file])
+			user.update(image_path: "/uploads/#{user.id}/#{params[:file].original_filename}")
+		end
+		redirect_to settings_path
 	end
 
 	private
@@ -46,4 +55,18 @@ class UsersController < ApplicationController
 			user.update(password: params[:user][:new_password])
 		end
 	end
+
+	def save_profile_pic(file)
+		user_img_dir_path = Rails.root.join('public', 'uploads', current_user.id.to_s)
+		Dir.mkdir(user_img_dir_path) unless Dir.exist?(user_img_dir_path)
+	
+		begin
+			File.open(user_img_dir_path.join(file.original_filename), 'wb') do |f|
+				f.write(file.read)
+			end
+		rescue IOError => e
+			puts "IOError occurred: #{e.message}"
+		end
+	end
+	
 end
