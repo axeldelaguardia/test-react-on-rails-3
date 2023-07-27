@@ -1,6 +1,6 @@
 import { Select } from 'antd';
 import React from 'react';
-import handleFormSubmit from '../../utils/formUtils';
+import {handleFormSubmit} from '../../utils/formUtils';
 
 const [authenticity_token] = [document.querySelector('meta[name="csrf-token"]').content];
 

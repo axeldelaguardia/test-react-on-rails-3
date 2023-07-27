@@ -1,4 +1,5 @@
 $primary-color: #3b3b3b;
+$secondary-color: #d9d7c7;
 
 body {
     background: $primary-color;
@@ -19,7 +20,7 @@ body {
     }
 
     .title {
-        color: #d1cc94;
+        color: $secondary-color;
         margin-right: 20px;
     }
 
@@ -39,7 +40,7 @@ body {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			color: #c5ccd9;
+			color: $secondary-color;
 		}
 
     .settingsPart {
@@ -62,7 +63,7 @@ body {
     .contentLayout {
         padding: 0 24px 24px;
         background: $primary-color;
-        color: #d1cc94;
+        color: $secondary-color;
         flex: 1;
     }
 }

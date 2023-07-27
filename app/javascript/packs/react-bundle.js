@@ -9,6 +9,7 @@ import TimeZoneDropdown from '../bundles/Dashboard/components/SettingsComponents
 import NavBar from '../bundles/Dashboard/components/NavBar';
 import Dashboard from '../bundles/Dashboard/components/Dashboard';
 import UpdateAccount from '../bundles/Dashboard/components/SettingsComponents/UpdateAccount';
+import ProfileSettings from '../bundles/Dashboard/components/SettingsComponents/ProfileSettings';
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
@@ -21,4 +22,5 @@ ReactOnRails.register({
 	NavBar,
 	Dashboard,
 	UpdateAccount,
+	ProfileSettings,
 });

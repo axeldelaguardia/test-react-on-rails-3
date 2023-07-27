@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UpdateUserInfoModal from "./UpdateUserInfo";
-import  handleFormSubmit  from "../../utils/formUtils";
+import  {handleFormSubmit}  from "../../utils/formUtils";
 import TimeZoneDropdown from "./TimeZoneDropdown";
 
 const AccountInfo = ({name, email, timezone}) => {

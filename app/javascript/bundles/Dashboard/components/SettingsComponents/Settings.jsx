@@ -7,6 +7,7 @@ import style from './Settings.module.scss';
 import AccountInfo from './AccountInfo';
 import UpdateAccount from './UpdateAccount';
 import PageLayout from '../PageLayout';
+import ProfileSettings from './ProfileSettings';
 
 const accountSettings = [LaptopOutlined].map((icon, index) => {
 	const key = String(index + 1);
@@ -14,7 +15,7 @@ const accountSettings = [LaptopOutlined].map((icon, index) => {
 		key: `sub${key}`,
 		icon: React.createElement(icon),
 		label: 'Account Settings',
-		children: ["Account Information", "Update Account", "Password"].map((label, j) => {
+		children: ["Account Information", "Update Account", "Profile"].map((label, j) => {
 			const subKey = index * 4 + j + 1;
 			return {
 				key: subKey,
@@ -42,8 +43,8 @@ const displaySettings = [UserOutlined].map((icon, index) => {
 
 const settingsMenu = [...accountSettings, ...displaySettings,]
 
-const Settings = ({user, name, email, timezone}) => {
-
+const Settings = ({user, name, email, timezone, image_path}) => {
+	console.log(image_path);
 	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 	useEffect(() => {
 		setSelectedMenuItem('1');
@@ -75,8 +76,8 @@ const Settings = ({user, name, email, timezone}) => {
           <Content className={style.content}>
             {selectedMenuItem === '1' && <AccountInfo name={name} email={email} timezone={timezone}/>}
             {selectedMenuItem === '2' && <UpdateAccount/>}
-            {selectedMenuItem === '3' && <div>Password</div>}
-            {selectedMenuItem === '4' && <div>Background</div>}
+            {selectedMenuItem === '3' && <ProfileSettings profile_pic_path={image_path}/>}
+            {selectedMenuItem === '4' && <div>Themes</div>}
             {selectedMenuItem === '5' && <div>Font</div>}
           </Content>
         </div>
@@ -91,6 +92,7 @@ Settings.propTypes = {
 	email: PropTypes.string.isRequired,
 	timezone: PropTypes.string.isRequired,
 	user: PropTypes.object,
+	image_path: PropTypes.string,
 };
 
 export default Settings;

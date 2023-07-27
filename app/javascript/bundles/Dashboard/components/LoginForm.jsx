@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from './LoginForm.module.scss';
-import handleFormSubmit from '../utils/formUtils';
+import {handleFormSubmit} from '../utils/formUtils';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');

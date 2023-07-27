@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import style from './UpdateAccount.module.scss'
 import TimeZoneDropdown from './TimeZoneDropdown';
 import UpdateUserInfoModal from './UpdateUserInfo';
-import handleFormSubmit from '../../utils/formUtils';
+import {handleFormSubmit} from '../../utils/formUtils';
 
 const UpdateAccount = () => {
 	const [isNameModalVisible, setIsNameModalVisible] = useState(false);
@@ -33,7 +33,7 @@ const UpdateAccount = () => {
 
 	return (
 		<div>
-			<h1>Update Account</h1>
+			<h2>Update Account</h2>
 			<div className={style.cards}>
 				<div className={style.card}>
 					<h3>Name</h3>
