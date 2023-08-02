@@ -13,16 +13,15 @@ const Background = () => {
 		const url = "/users";
 		const method = "patch";
 		const data = {"user[background_path]": newBackground};
-		console.log(newBackground)
 		handleFormSubmit(url, method, authenticity_token, data);
   };
 
 	return (
 		<>
-		<h3>Profile</h3>
+		<h3>Backgrounds</h3>
 		<div className={style.cards}>
 			<div className={style.card}>
-				<h3>Backgrounds</h3>
+				<h3></h3>
 				<div className={style.background}>
 					<Radio.Group onChange={onChange} value={selectedBackground}>
 						<Radio value={"/images/dark_milky_way.jpg"}>

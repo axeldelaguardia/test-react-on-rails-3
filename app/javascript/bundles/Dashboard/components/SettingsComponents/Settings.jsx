@@ -45,6 +45,15 @@ const displaySettings = [UserOutlined].map((icon, index) => {
 const settingsMenu = [...accountSettings, ...displaySettings,]
 
 const Settings = ({user, name, email, timezone, image_path, background_path}) => {
+	const [localName, setLocalName] = useState(name);
+	const [localEmail, setLocalEmail] = useState(email);
+	const [localTimezone, setLocalTimezone] = useState(timezone);
+
+	const updateAccountInfo = (updatedData) => {
+		setLocalName(updatedData.user.name);
+		setLocalEmail(updatedData.user.email);
+		setLocalTimezone(updatedData.user.timezone);
+	};
 
 	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 	useEffect(() => {
@@ -53,7 +62,6 @@ const Settings = ({user, name, email, timezone, image_path, background_path}) =>
 
 	const handleMenuItemSelect = (item) => {
 		setSelectedMenuItem(item.key);
-		// console.log(item.key, item)
 	}
 
   return (
@@ -75,8 +83,19 @@ const Settings = ({user, name, email, timezone, image_path, background_path}) =>
 				</div>
         <div className={style.contentLayout}>
           <Content className={style.content}>
-            {selectedMenuItem === '1' && <AccountInfo name={name} email={email} timezone={timezone}/>}
-            {selectedMenuItem === '2' && <UpdateAccount/>}
+            {selectedMenuItem === '1' && (
+							<AccountInfo 
+								name={localName} 
+								email={localEmail} 
+								timezone={localTimezone}/>
+						)}
+            {selectedMenuItem === '2' && (
+							<UpdateAccount
+								name={localName}
+								email={localEmail}
+								timezone={localTimezone}
+								onUpdateSuccess={updateAccountInfo}/>
+						)}
             {selectedMenuItem === '3' && <ProfileSettings profile_pic_path={image_path}/>}
             {selectedMenuItem === '4' && <Background/>}
             {selectedMenuItem === '5' && <div>Font</div>}

@@ -39,12 +39,13 @@ class UsersController < ApplicationController
 		user = current_user
 		if (!user_params[:background_path]) && authenticate(user)
 			params[:user][:new_password] ? update_password(user) : user.update(user_params)
+			render json: { user: user }
 		elsif user_params[:background_path]
 			user.update(user_params)
+			redirect_to "/settings"
 		else
 			flash[:danger] = "Incorrect password."
 		end
-		redirect_to settings_path
 	end
 
 	def upload_image
@@ -63,7 +64,7 @@ class UsersController < ApplicationController
 	end
 
 	def authenticate(user)
-		user&.authenticate(params[:user][:current_password])
+		user&.authenticate(params[:current_password])
 	end
 
 	def update_password(user)

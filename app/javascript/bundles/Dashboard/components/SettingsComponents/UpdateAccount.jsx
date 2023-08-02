@@ -3,31 +3,31 @@ import style from './UpdateAccount.module.scss'
 import TimeZoneDropdown from './TimeZoneDropdown';
 import UpdateUserInfoModal from './UpdateUserInfo';
 import {handleFormSubmit} from '../../utils/formUtils';
+import axios from 'axios';
 
-const UpdateAccount = () => {
+const UpdateAccount = ({ onUpdateSuccess }) => {
 	const [isNameModalVisible, setIsNameModalVisible] = useState(false);
   const [isEmailModalVisible, setIsEmailModalVisible] = useState(false);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
 	const authenticity_token = document.querySelector('meta[name="csrf-token"]').content;
 
-		const handleUpdate = (values) => {
-			const url = '/users';
-			const method = 'patch';
-			const data = {};
-			Object.keys(values).forEach(key => {
-					data[`user[${key}]`] = values[key];
-				});
-			console.log(data);
-	
-			handleFormSubmit(url, method, authenticity_token, data);
-			// use axios and async/await
-			// axios.post(url, data, { headers: { 'X-CSRF-Token': authenticity_token } }, (response) => {
-			// 	console.log(response); response should be json
-			// })
-			// controller sends back json and in component we use windows.href to redirect to dashboard 
-			setIsNameModalVisible(false);
-			setIsEmailModalVisible(false);
-			setIsPasswordModalVisible(false);
+	const handleUpdate = async (values) => {
+		const url = '/users';
+		const data = values;
+		
+		try {
+			const response = await axios.patch(url, data, {
+				headers: { 'X-CSRF-Token': authenticity_token } 
+			});
+			console.log(response);
+			onUpdateSuccess(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+
+		setIsNameModalVisible(false);
+		setIsEmailModalVisible(false);
+		setIsPasswordModalVisible(false);
 	};
 
 	const handleCancel = () => {
