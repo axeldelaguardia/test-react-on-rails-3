@@ -1,5 +1,5 @@
-$primary-color: #3b3b3b;
-$secondary-color: #d9d7c7;
+@import "../variables";
+
 
 .cards {
   display: flex;
@@ -29,7 +29,7 @@ $secondary-color: #d9d7c7;
         border-radius: 50%;
         border: 2px solid #ccc;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        overflow: hidden; /* Ensure the image stays within the container */
+        overflow: hidden;
 
         img {
           object-fit: cover;

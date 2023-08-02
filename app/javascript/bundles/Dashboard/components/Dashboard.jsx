@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import PageLayout from './PageLayout'
 import style from './Dashboard.module.scss'
 
-const Dashboard = ({user, name, email}) => {
+const Dashboard = ({user, background_path, name, email}) => {
 	const handleOnMouseMoveEvent = (e) => {
 		const { currentTarget: target } = e;
 
@@ -21,7 +21,7 @@ const Dashboard = ({user, name, email}) => {
 	// }
 
 	return (
-		<PageLayout user={user} className={style.mainLayout}>
+		<PageLayout user={user} background={background_path} className={style.mainLayout}>
 			<div className={style.cardBody}>
 				<div className={style.cards}>
 					<div className={style.card}>
@@ -130,6 +130,7 @@ Dashboard.propTypes = {
 	user: PropTypes.object,
 	name: PropTypes.string,
 	email: PropTypes.string,
+	background_path: PropTypes.string,
 };
 
 export default Dashboard;

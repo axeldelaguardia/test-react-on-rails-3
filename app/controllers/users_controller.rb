@@ -4,7 +4,14 @@ class UsersController < ApplicationController
 	def show
 		if current_user
 			user = current_user
-			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone, image_path: user.image_path }
+			@user_props = { 
+				user: user, 
+				name: user.name, 
+				email: user.email, 
+				timezone: user.timezone, 
+				image_path: user.image_path,
+				background_path: user.background_path
+			}
 		else
 			flash[:danger] = "You must be logged in to view this page."
 			redirect_to root_path
@@ -14,7 +21,14 @@ class UsersController < ApplicationController
 	def edit
 		if current_user
 			user = current_user
-			@user_props = { user: user, name: user.name, email: user.email, timezone: user.timezone, image_path: user.image_path }
+			@user_props = { 
+				user: user, 
+				name: user.name, 
+				email: user.email, 
+				timezone: user.timezone, 
+				image_path: user.image_path,
+				background_path: user.background_path
+			}
 		else
 			flash[:danger] = "You must be logged in to view this page."
 			redirect_to root_path
@@ -23,8 +37,10 @@ class UsersController < ApplicationController
 
 	def update
 		user = current_user
-		if authenticate(user)
+		if (!user_params[:background_path]) && authenticate(user)
 			params[:user][:new_password] ? update_password(user) : user.update(user_params)
+		elsif user_params[:background_path]
+			user.update(user_params)
 		else
 			flash[:danger] = "Incorrect password."
 		end
@@ -43,7 +59,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:name, :email, :timezone)
+		params.require(:user).permit(:name, :email, :timezone, :background_path)
 	end
 
 	def authenticate(user)

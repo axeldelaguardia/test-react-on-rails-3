@@ -1,9 +1,4 @@
-$primary-color: #3b3b3b;
-$secondary-color: #d9d7c7;
-
-body {
-    background: $primary-color;
-}
+@import "../variables";
 
 .mainLayout {
     height: 100vh;
@@ -15,7 +10,7 @@ body {
         align-items: center;
         justify-content: space-between;
         padding: 0 24px;
-        background: #515459;
+				background-color: rgba(255, 255, 255, 0.2);
         border-radius: 0 0 7px 7px;
     }
 
@@ -34,7 +29,7 @@ body {
 
 		.navMenu li {
 			margin: 1px;
-			background-color: rgba(255, 255, 255, 0.04);
+			background-color: rgba(255, 255, 255, 0.06);
 			width: auto;
 			height: 100%;
 			display: flex;
@@ -45,13 +40,14 @@ body {
 
     .settingsPart {
         width: auto;
-        background: $primary-color;
+        background: inherit;
         display: flex;
     }
 
     .siderWrapper {
-        background: $primary-color;
+        background: transparent;
         height: 100%;
+
         .subMenu {
             background-color: rgba(255, 255, 255, 0.6);
             border-radius: 0 10px 10px 0;
@@ -62,7 +58,7 @@ body {
 
     .contentLayout {
         padding: 0 24px 24px;
-        background: $primary-color;
+        background: inherit;
         color: $secondary-color;
         flex: 1;
     }

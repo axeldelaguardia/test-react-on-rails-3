@@ -1,10 +1,13 @@
+@import "variables";
+
 .cardBody {
   align-items: center;
-  background-color: var(--bg-color);
+  // background-color: var(--bg-color);
   display: flex;
   height: 100%;
   justify-content: center;
   margin: 0px;
+	margin-top: 40px;
   overflow: hidden;
   padding: 0px;
 }
@@ -18,7 +21,7 @@
 }
 
 .card {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   cursor: pointer;
   display: flex;

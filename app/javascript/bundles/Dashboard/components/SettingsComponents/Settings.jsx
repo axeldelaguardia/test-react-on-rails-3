@@ -8,6 +8,7 @@ import AccountInfo from './AccountInfo';
 import UpdateAccount from './UpdateAccount';
 import PageLayout from '../PageLayout';
 import ProfileSettings from './ProfileSettings';
+import Background from './DisplaySettings/Background';
 
 const accountSettings = [LaptopOutlined].map((icon, index) => {
 	const key = String(index + 1);
@@ -43,8 +44,8 @@ const displaySettings = [UserOutlined].map((icon, index) => {
 
 const settingsMenu = [...accountSettings, ...displaySettings,]
 
-const Settings = ({user, name, email, timezone, image_path}) => {
-	console.log(image_path);
+const Settings = ({user, name, email, timezone, image_path, background_path}) => {
+
 	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 	useEffect(() => {
 		setSelectedMenuItem('1');
@@ -52,11 +53,11 @@ const Settings = ({user, name, email, timezone, image_path}) => {
 
 	const handleMenuItemSelect = (item) => {
 		setSelectedMenuItem(item.key);
-		console.log(item.key, item)
+		// console.log(item.key, item)
 	}
 
   return (
-		<PageLayout className={style.mainLayout} user={user}>
+		<PageLayout className={style.mainLayout} user={user} background={background_path}>
       <Layout className={style.settingsPart}>
 				<div className={style.siderEdge}>
 					<Sider width={230}>
@@ -77,7 +78,7 @@ const Settings = ({user, name, email, timezone, image_path}) => {
             {selectedMenuItem === '1' && <AccountInfo name={name} email={email} timezone={timezone}/>}
             {selectedMenuItem === '2' && <UpdateAccount/>}
             {selectedMenuItem === '3' && <ProfileSettings profile_pic_path={image_path}/>}
-            {selectedMenuItem === '4' && <div>Themes</div>}
+            {selectedMenuItem === '4' && <Background/>}
             {selectedMenuItem === '5' && <div>Font</div>}
           </Content>
         </div>
@@ -93,6 +94,7 @@ Settings.propTypes = {
 	timezone: PropTypes.string.isRequired,
 	user: PropTypes.object,
 	image_path: PropTypes.string,
+	background_path: PropTypes.string,
 };
 
 export default Settings;

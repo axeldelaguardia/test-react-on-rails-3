@@ -8,7 +8,7 @@ const UpdateAccount = () => {
 	const [isNameModalVisible, setIsNameModalVisible] = useState(false);
   const [isEmailModalVisible, setIsEmailModalVisible] = useState(false);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
-	const [authenticity_token] = useState(document.querySelector('meta[name="csrf-token"]').content);
+	const authenticity_token = document.querySelector('meta[name="csrf-token"]').content;
 
 		const handleUpdate = (values) => {
 			const url = '/users';
@@ -20,6 +20,11 @@ const UpdateAccount = () => {
 			console.log(data);
 	
 			handleFormSubmit(url, method, authenticity_token, data);
+			// use axios and async/await
+			// axios.post(url, data, { headers: { 'X-CSRF-Token': authenticity_token } }, (response) => {
+			// 	console.log(response); response should be json
+			// })
+			// controller sends back json and in component we use windows.href to redirect to dashboard 
 			setIsNameModalVisible(false);
 			setIsEmailModalVisible(false);
 			setIsPasswordModalVisible(false);
@@ -66,5 +71,6 @@ const UpdateAccount = () => {
 		</div>
 	);
 };
+
 
 export default UpdateAccount;

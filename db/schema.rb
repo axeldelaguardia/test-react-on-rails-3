@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_014152) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_27_031518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_014152) do
     t.string "image_path"
     t.string "display_name"
     t.string "about_me"
+    t.string "background_path"
   end
 
 end
