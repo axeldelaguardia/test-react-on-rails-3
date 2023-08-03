@@ -48,11 +48,16 @@ const Settings = ({user, name, email, timezone, image_path, background_path}) =>
 	const [localName, setLocalName] = useState(name);
 	const [localEmail, setLocalEmail] = useState(email);
 	const [localTimezone, setLocalTimezone] = useState(timezone);
+	const [localBackgroundPath, setLocalBackgroundPath] = useState(background_path);
 
 	const updateAccountInfo = (updatedData) => {
 		setLocalName(updatedData.user.name);
 		setLocalEmail(updatedData.user.email);
 		setLocalTimezone(updatedData.user.timezone);
+	};
+
+	const updateBackground = (updatedData) => {
+		setLocalBackgroundPath(updatedData.user.background_path);
 	};
 
 	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
@@ -65,7 +70,7 @@ const Settings = ({user, name, email, timezone, image_path, background_path}) =>
 	}
 
   return (
-		<PageLayout className={style.mainLayout} user={user} background={background_path}>
+		<PageLayout className={style.mainLayout} user={user} background={localBackgroundPath}>
       <Layout className={style.settingsPart}>
 				<div className={style.siderEdge}>
 					<Sider width={230}>
@@ -97,7 +102,11 @@ const Settings = ({user, name, email, timezone, image_path, background_path}) =>
 								onUpdateSuccess={updateAccountInfo}/>
 						)}
             {selectedMenuItem === '3' && <ProfileSettings profile_pic_path={image_path}/>}
-            {selectedMenuItem === '4' && <Background/>}
+            {selectedMenuItem === '4' && (
+							<Background
+								onUpdateSuccess={updateBackground}
+							/>
+						)}
             {selectedMenuItem === '5' && <div>Font</div>}
           </Content>
         </div>
