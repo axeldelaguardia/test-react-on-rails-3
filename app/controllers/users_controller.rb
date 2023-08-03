@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 			render json: { user: user }
 		elsif user_params[:background_path]
 			user.update(user_params)
-			redirect_to "/settings"
+			render json: { user: user }
 		else
 			flash[:danger] = "Incorrect password."
 		end
