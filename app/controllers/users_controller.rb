@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	layout "react"
+	before_action :require_login, only: [:show, :edit, :update, :upload_image]
 
 	def show
 		set_user_props(current_user)
@@ -11,10 +12,19 @@ class UsersController < ApplicationController
 
 	def update
 		user = current_user
-		if (!user_params[:background_path]) && authenticate(user)
-			params[:user][:new_password] ? update_password(user) : user.update(user_params)
-		elsif user_params[:background_path]
+		# if (!user_params[:background_path]) && authenticate(user)
+		# 	require 'pry'; binding.pry
+		# 	params[:new_password] ? update_password(user) : user.update(user_params)
+		# elsif user_params[:background_path]
+		# 	user.update(user_params)
+		# else
+		# 	flash[:danger] = "Incorrect password."
+		# end
+		# render json: { user: user }
+		if user_params[:background_path]
 			user.update(user_params)
+		elsif authenticate(user)
+			params[:new_password] ? update_password(user) : user.update(user_params)
 		else
 			flash[:danger] = "Incorrect password."
 		end
@@ -37,7 +47,9 @@ class UsersController < ApplicationController
 			:email, 
 			:timezone, 
 			:background_path, 
-			:photo
+			:photo,
+			:new_password,
+			:new_password_confirmation
 		)
 	end
 
@@ -66,7 +78,8 @@ class UsersController < ApplicationController
 			email: user.email,
 			timezone: user.timezone,
 			image_path: profile_picture,
-			background_path: user.background_path
+			background_path: user.background_path,
+			wleds: user.wleds.pluck(:ip)
 		}
 	end
 end
