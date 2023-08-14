@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 		redirect_to settings_path
 	end
 
-	private
+  private
 
 	def user_params
 		params.require(:user).permit(
@@ -53,15 +53,15 @@ class UsersController < ApplicationController
 		)
 	end
 
-	def authenticate(user)
-		user&.authenticate(params[:current_password])
-	end
+  def authenticate(user)
+    user&.authenticate(params[:current_password])
+  end
 
-	def update_password(user)
-		if (params[:user][:new_password] == params[:user][:new_password_confirmation])
-			user.update(password: params[:user][:new_password])
-		end
-	end
+  def update_password(user)
+    if (params[:user][:new_password] == params[:user][:new_password_confirmation])
+      user.update(password: params[:user][:new_password])
+    end
+  end
 
 	def require_login
 		unless current_user
