@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
 
   def index
 		if current_user
-			@user_props = { user: current_user }
+			@user_props = UserBlueprint.render(current_user)
 		end
   end
 end
