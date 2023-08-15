@@ -8,16 +8,15 @@ class SessionsController < ApplicationController
     user = User.find_by(email: session_params[:email].downcase)
     if user&.authenticate(params[:session][:password])
       log_in(user)
-      redirect_to "/dashboard"
+      render json: { message: 'Logged in successfully' }
     else
-      flash.now[:danger] = "Invalid email/password combination"
-      redirect_to root_path
+      render json: { message: 'Invalid email/password combination' }, status: 401
     end
   end
 
   def destroy
     log_out
-    redirect_to root_path
+    render json: {message: 'Logged out successfully'}
   end
 
   private
@@ -27,6 +26,7 @@ class SessionsController < ApplicationController
 
   def log_out
     session.delete(:user_id)
+    session.delete(:signed_img_url)
     @current_user = nil
   end
 
