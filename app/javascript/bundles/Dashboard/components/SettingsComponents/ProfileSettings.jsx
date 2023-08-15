@@ -26,7 +26,7 @@ const ProfileSettings = ({profile_pic_path}) => {
 		}
 	};
 	
-	const profilePic = profile_pic_path ? profile_pic_path : "/images/default_profile_pic.jpg"
+	const profilePic = profile_pic_path ? `data:image/jpeg;base64,${profile_pic_path}`: "/images/default_profile_pic.jpg";
 
   return (
     <>
