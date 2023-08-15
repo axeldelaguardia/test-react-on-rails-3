@@ -1,32 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './ProfileSettings.module.scss';
-import { handleFileUpload } from '../../utils/formUtils';
+import axios from 'axios';
+import ReactOnRails from 'react-on-rails';
 
 const ProfileSettings = ({profile_pic_path}) => {
-  const [authenticity_token] = useState(
-    document.querySelector('meta[name="csrf-token"]').content
-  );
   const hiddenFileInput = React.useRef(null);
 
   const handleClick = () => {
     hiddenFileInput.current.click();
   };
 
-	const handleChange = (event) => {
-		const fileInput = event.target;
-		const file = fileInput.files[0];
-		if (file) {
-			handleFileUpload('/upload_image', authenticity_token, file);
-
-			const newFileInput = document.createElement('input');
-			newFileInput.type = 'file';
-			newFileInput.style.display = 'none';
-			newFileInput.addEventListener('change', handleChange);
-			fileInput.parentNode.replaceChild(newFileInput, fileInput);
-		}
+	const handleChange = async (event) => {
+    const url = '/upload_image'
+    const data = {'file': event.target.files[0]}
+    const response = await axios.post(url, data, {
+      headers: ReactOnRails.authenticityHeaders({'Content-Type': 'multipart/form-data'})
+    });
+    if(response.status === 200) {
+      window.location.reload();
+    }
 	};
-	
-	const profilePic = profile_pic_path ? `data:image/jpeg;base64,${profile_pic_path}`: "/images/default_profile_pic.jpg";
+
+	const profilePic = profile_pic_path;
 
   return (
     <>

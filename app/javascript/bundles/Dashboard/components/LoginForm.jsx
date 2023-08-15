@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import style from './LoginForm.module.scss';
-import {handleFormSubmit} from '../utils/formUtils';
+import axios from 'axios';
+import ReactOnRails from 'react-on-rails';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-	const [authenticity_token] = useState(document.querySelector('meta[name="csrf-token"]').content);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-    const form = e.target;
-
-    const url = form.getAttribute('action');
-    const method = 'post';
-    const data = {
-      'session[email]': email,
-      'session[password]': password,
-    };
-
-    handleFormSubmit(url, method, authenticity_token, data);
+    const response = await axios.post('/login', {
+      'email': email,
+      'password': password,
+    }, {
+      headers: ReactOnRails.authenticityHeaders(),
+    }).then((response) => {
+      if(response.status === 200) {
+        window.location.href = '/dashboard';
+        };
+    }).catch((error) => {
+      console.log(error);
+      alert('Invalid email or password');
+    });
 	};
 
   return (

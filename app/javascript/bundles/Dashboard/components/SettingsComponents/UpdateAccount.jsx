@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import style from './UpdateAccount.module.scss'
 import TimeZoneDropdown from './TimeZoneDropdown';
 import UpdateUserInfoModal from './UpdateUserInfo';
-import {handleFormSubmit} from '../../utils/formUtils';
 import axios from 'axios';
+import ReactOnRails from 'react-on-rails';
 
 const UpdateAccount = ({ onUpdateSuccess }) => {
 	const [isNameModalVisible, setIsNameModalVisible] = useState(false);
   const [isEmailModalVisible, setIsEmailModalVisible] = useState(false);
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
-	const authenticity_token = document.querySelector('meta[name="csrf-token"]').content;
 
 	const handleUpdate = async (values) => {
 		const url = '/users';
@@ -17,12 +16,13 @@ const UpdateAccount = ({ onUpdateSuccess }) => {
 		
 		try {
 			const response = await axios.patch(url, data, {
-				headers: { 'X-CSRF-Token': authenticity_token } 
+				headers:  ReactOnRails.authenticityHeaders() 
 			});
 			console.log(response);
 			onUpdateSuccess(response.data);
 		} catch (error) {
 			console.log(error);
+			alert('Something went wrong. Please try again.')
 		}
 
 		setIsNameModalVisible(false);

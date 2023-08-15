@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_171850) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "timezone"
-    t.string "image_path"
+    t.string "image_name", default: "1"
     t.string "display_name"
     t.string "about_me"
     t.string "background_path"

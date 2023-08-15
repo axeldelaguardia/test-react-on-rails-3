@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import style from './Background.module.scss'
 import { Radio } from 'antd';
 import axios from 'axios';
+import ReactOnRails from 'react-on-rails'
 
 const Background = ({onUpdateSuccess}) => {
 	const [selectedBackground, setSelectedBackground] = React.useState(null);
-	const [authenticity_token] = useState(document.querySelector('meta[name="csrf-token"]').content);
 
   const onChange = async (e) => {
     const newBackground = e.target.value;
@@ -13,7 +13,9 @@ const Background = ({onUpdateSuccess}) => {
 		const url = "/users";
 		const data = {"background_path": newBackground};
 		try {
-			const response = await axios.patch(url, data, { headers: { 'X-CSRF-Token': authenticity_token } });
+			const response = await axios.patch(url, data, {
+        headers: ReactOnRails.authenticityHeaders(),
+      });
 			console.log(response);
 			onUpdateSuccess(response.data);
 		} catch (error) {
