@@ -63,9 +63,20 @@ group :development do
   # gem "spring"
 end
 
+gem "dotenv-rails", "~> 2.8"
 
 gem "shakapacker", "7.0"
 
 gem "react_on_rails", "13.3"
 
 gem "bcrypt", "~> 3.1"
+
+gem "faraday", "~> 2.7"
+
+gem "faraday-multipart", "~> 1.0"
+
+gem "aws-sdk-s3", "~> 1.132"
+
+gem "image_processing", "~> 1.12"
+
+gem "blueprinter", "~> 0.25.3"

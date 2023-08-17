@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import style from './Background.module.scss'
 import { Radio } from 'antd';
-import { handleFormSubmit } from '../../../utils/formUtils';
+import axios from 'axios';
+import ReactOnRails from 'react-on-rails'
 
-const Background = () => {
+const Background = ({onUpdateSuccess}) => {
 	const [selectedBackground, setSelectedBackground] = React.useState(null);
-	const [authenticity_token] = useState(document.querySelector('meta[name="csrf-token"]').content);
 
-  const onChange = (e) => {
+  const onChange = async (e) => {
     const newBackground = e.target.value;
 		setSelectedBackground(newBackground);
 		const url = "/users";
-		const method = "patch";
-		const data = {"user[background_path]": newBackground};
-		handleFormSubmit(url, method, authenticity_token, data);
+		const data = {"background_path": newBackground};
+		try {
+			const response = await axios.patch(url, data, {
+        headers: ReactOnRails.authenticityHeaders(),
+      });
+			console.log(response);
+			onUpdateSuccess(response.data);
+		} catch (error) {
+			console.log(error);
+		}
   };
 
 	return (

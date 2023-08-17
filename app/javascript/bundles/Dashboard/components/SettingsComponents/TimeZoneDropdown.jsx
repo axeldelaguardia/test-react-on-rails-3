@@ -1,18 +1,17 @@
 import { Select } from 'antd';
 import React from 'react';
-import {handleFormSubmit} from '../../utils/formUtils';
+import axios from 'axios';
+import ReactOnRails from 'react-on-rails';
 
-const [authenticity_token] = [document.querySelector('meta[name="csrf-token"]').content];
-
-const onChange = (value) => {
+const onChange = async (value) => {
 	const url = '/users';
-	const method = 'patch';
-	const data = {
-		'user[timezone]': value,
-	};
-
-	handleFormSubmit(url, method, authenticity_token, data);
-	console.log(`selected ${value}`);
+  const data = { 'timezone': value }
+  const response = await axios.patch(url, data, {
+      headers: ReactOnRails.authenticityHeaders(),
+    });
+  if(response.status === 200) {
+    window.location.reload();
+  }
 };
 
 const onSearch = (value) => {

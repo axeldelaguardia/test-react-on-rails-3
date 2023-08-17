@@ -35,3 +35,23 @@
 .card:hover {
 	box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.5);
 }
+
+.cardContent {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: end;
+	padding: 0px 20px;
+	width: 100%;
+}
+
+.cardImage {
+	width: calc(100% - 100px);
+	margin-bottom: 10px;
+}
+
+.cardMenu {
+	background-color: rgba(251, 132, 5, 0.5);
+	border-radius: 15%;
+}

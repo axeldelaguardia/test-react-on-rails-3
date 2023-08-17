@@ -1,0 +1,3 @@
+class Wled < ApplicationRecord
+  belongs_to :user
+end

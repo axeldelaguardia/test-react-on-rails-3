@@ -9,7 +9,7 @@ const items1 = ['Home', 'Dashboard', 'Settings'].map((key) => ({
   label: key,
 }));
 
-const NavBar = ({ authType }) => {
+const NavBar = ({ authType, userImage }) => {
 
 	const [selectedNavItem, setSelectedNavItem] = useState(null);
 
@@ -28,12 +28,12 @@ const NavBar = ({ authType }) => {
 				break;
 		}
 	};
-
+  console.log(userImage)
   return (
 		<Header
 			className={style.header}
 		>
-			<h1 className={style.title} >React on Rails Demo</h1>
+			<h1 className={style.title} >Home WLED</h1>
 			<Menu 
 				theme="dark"
 				defaultSelectedKeys={['1']} 
@@ -41,6 +41,7 @@ const NavBar = ({ authType }) => {
 				className={style.navMenu}
 				onSelect={handleNavItemSelect}
 			/>
+      <img src={userImage} alt="" style={{width: '50px', height: '50px'}} />
 			<AuthButton type={ authType } />
 		</Header>
   );
